@@ -169,10 +169,13 @@ jobs:
           cache-from: type=gha,scope=${{ matrix.service }}
           cache-to: type=gha,scope=${{ matrix.service }},mode=max
 
+      - name: Extract OCI tarball to directory layout
+        run: mkdir -p /tmp/image-oci && tar -xf /tmp/image.tar -C /tmp/image-oci
+
       - name: Trivy scan (JSON report)
         uses: aquasecurity/trivy-action@v0.36.0
         with:
-          input: /tmp/image.tar
+          input: /tmp/image-oci
           exit-code: "0"
           severity: "CRITICAL,HIGH"
           format: "json"
@@ -196,7 +199,7 @@ jobs:
       - name: Trivy scan (fail on CRITICAL)
         uses: aquasecurity/trivy-action@v0.36.0
         with:
-          input: /tmp/image.tar
+          input: /tmp/image-oci
           exit-code: "1"
           severity: "CRITICAL"
           format: "table"
