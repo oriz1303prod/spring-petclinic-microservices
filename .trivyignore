@@ -8,5 +8,31 @@
 #   3. Add the CVE ID below with a comment explaining why
 #   4. Commit and push — the next pipeline run will skip it
 #
-# Example:
-# CVE-2024-12345  # False positive: not reachable in our code path
+# Review date: 2026-11-05
+# Reason: Upstream Spring Boot 4.0.1 dependencies — fix requires bumping
+#         parent BOM to 4.0.6+. Accepted risk for learning project until
+#         dependency upgrade is planned.
+
+# Netty — SNI routing bypass via fragmented TLS ClientHello (fixed in 4.2.17)
+CVE-2026-75595
+
+# Tomcat Embed 11.0.15 — 7 CVEs (fixed in 11.0.22-11.0.25)
+CVE-2026-41293
+CVE-2026-43512
+CVE-2026-43515
+CVE-2026-55276
+CVE-2026-65182
+CVE-2026-65905
+CVE-2026-68525
+
+# BouncyCastle 1.81 — 2 CVEs (fixed in 1.85)
+CVE-2025-14813
+CVE-2026-8763
+
+# Spring Boot 4.0.1 — security bypass (fixed in 4.0.6)
+CVE-2026-40976
+
+# Spring Framework 7.0.2 — 4 CVEs (fixed in 7.0.9)
+CVE-2026-47890
+CVE-2026-47892
+CVE-2026-47884
