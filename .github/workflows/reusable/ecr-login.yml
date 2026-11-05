@@ -1,0 +1,33 @@
+name: ECR Login
+
+on:
+  workflow_call:
+    inputs:
+      aws-region:
+        description: "AWS region for ECR"
+        type: string
+        default: us-east-1
+    secrets:
+      aws-role-arn:
+        description: "IAM role ARN for OIDC authentication"
+        required: true
+    outputs:
+      registry:
+        description: "ECR registry URL"
+        value: ${{ jobs.ecr-login.outputs.registry }}
+
+jobs:
+  ecr-login:
+    runs-on: ubuntu-latest
+    outputs:
+      registry: ${{ steps.login.outputs.registry }}
+    steps:
+      - name: Configure AWS credentials (OIDC)
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ secrets.aws-role-arn }}
+          aws-region: ${{ inputs.aws-region }}
+
+      - name: Login to Amazon ECR
+        id: login
+        uses: aws-actions/amazon-ecr-login@v2

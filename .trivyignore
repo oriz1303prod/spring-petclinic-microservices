@@ -1,0 +1,12 @@
+# Trivy CVE Allowlist
+# Add CVE IDs (one per line) that have been reviewed and accepted.
+# Format: CVE-YYYY-NNNNN
+#
+# How to use:
+#   1. Review the Trivy scan report artifact in the GitHub Actions run
+#   2. Verify the CVE is a false positive or accepted risk
+#   3. Add the CVE ID below with a comment explaining why
+#   4. Commit and push — the next pipeline run will skip it
+#
+# Example:
+# CVE-2024-12345  # False positive: not reachable in our code path
